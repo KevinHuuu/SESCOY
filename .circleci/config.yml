@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Download dataset
           command: |
-            wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip |
+            wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip
             unzip java.zip
       - run:
           name: Run tests in parallel

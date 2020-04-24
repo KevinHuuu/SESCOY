@@ -30,7 +30,7 @@ jobs:
             - build
   test:
     # Remove if parallelism is not desired
-#    parallelism: 2
+    parallelism: 2
     environment:
       # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
@@ -45,12 +45,16 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+
+      - run:
+          name: Download dataset
+          command: |
+            wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip |
+            unzip java.zip
       - run:
           name: Run tests in parallel
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
-            wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip |
-            unzip java.zip |
             cd src/test/java
             # Get list of classnames of tests that should run on this node
             CLASSNAMES=$(circleci tests glob "**/*.java" \

@@ -36,6 +36,9 @@ dependencies {
 
     compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
 
+    // https://mvnrepository.com/artifact/org.apache.lucene/lucene-core
+    compile group: 'org.apache.lucene', name: 'lucene-core', version: '8.5.1'
+
     runtime 'org.postgresql:postgresql:42.2.6'
     runtime 'com.h2database:h2'
 

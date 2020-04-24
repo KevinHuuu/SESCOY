@@ -37,11 +37,15 @@ public class FastTest {
 
         IndexWriter w = new IndexWriter(index, config);
         TextFileIndexer textFileIndexer = new TextFileIndexer();
+        textFileIndexer.addDoc(w, "Lucene in Action", "193398817");
+        textFileIndexer.addDoc(w, "Lucene for Dummies", "55320055Z");
+        textFileIndexer.addDoc(w, "Managing Gigabytes", "55063554A");
+        textFileIndexer.addDoc(w, "The Art of Computer Science", "9900333X");
         int numDocs = w.getDocStats().numDocs;
-        w.close();
-        assertEquals(numDocs, 4);
+        // delete the test added document
         w.deleteAll();
         w.close();
+        assertEquals(4, numDocs);
     }
 
 }

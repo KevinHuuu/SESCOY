@@ -15,7 +15,7 @@ public class FastTest {
     public void newQuotesTest() throws InterruptedException {
         Quote quote = new Quote();
         quote.setQuote("Hey");
-        assertEquals(quote.getQuote(), "Heyy");
+        assertEquals(quote.getQuote(), "Hey");
     }
 
 }

@@ -49,8 +49,11 @@ jobs:
       - run:
           name: Download dataset
           command: |
-            wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip
-            unzip java.zip
+            mkdir snippetsJson
+            cd snippetsJson
+            wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip
+            unzip python.zip
+            cd ../
       - run:
           name: Run tests in parallel
           # Use "./gradlew test" instead if tests are not run in parallel

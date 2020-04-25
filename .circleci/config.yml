@@ -54,6 +54,7 @@ jobs:
             wget https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip
             unzip python.zip
             cd ../
+            gunzip ./snippetsJson/python/final/jsonl/train/python_train_0.jsonl.gz
       - run:
           name: Run tests in parallel
           # Use "./gradlew test" instead if tests are not run in parallel

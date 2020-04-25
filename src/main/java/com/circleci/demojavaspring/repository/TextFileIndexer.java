@@ -1,5 +1,6 @@
 package com.circleci.demojavaspring.repository;
 
+import com.circleci.demojavaspring.model.Snippet;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -16,10 +17,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TextFileIndexer {
-    public static void addDoc(IndexWriter w, String title, String isbn) throws IOException {
+    public static void addExampleDoc(IndexWriter w, String title, String isbn) throws IOException {
         Document doc = new Document();
         doc.add(new TextField("title", title, Field.Store.YES));
         doc.add(new StringField("isbn", isbn, Field.Store.YES));
+        w.addDocument(doc);
+    }
+
+    public static void addSnippetDoc(IndexWriter w, Snippet snp) throws IOException {
+        Document doc = new Document();
+        doc.add(new TextField("docstring", snp.getDocstring(), Field.Store.YES));
+        doc.add(new TextField("code", snp.getCode(), Field.Store.YES));
+        doc.add(new StringField("url", snp.getUrl(), Field.Store.YES));
+        doc.add(new StringField("path", snp.getPath(), Field.Store.YES));
         w.addDocument(doc);
     }
 

@@ -5,6 +5,16 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### Project ###
+.gz
+.jsonl
+.json
+snippets/
+documents/
+.zip
+.pickle
+.jsonl.gz
+
 ### STS ###
 .apt_generated
 .classpath

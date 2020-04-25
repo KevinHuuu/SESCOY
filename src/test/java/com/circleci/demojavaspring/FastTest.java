@@ -127,25 +127,25 @@ public class FastTest {
 
         IndexWriter w = new IndexWriter(index, config);
         TextFileIndexer textFileIndexer = new TextFileIndexer();
-//        try (
-//                FileReader fileReader = new FileReader(("./snippetsJson/python/final/jsonl/train/python_train_0.jsonl"));
-//                BufferedReader bufferedReader = new BufferedReader(fileReader);
-//        ) {
-//            String currentLine;
-//            int i = 0;
-//            while ((currentLine = bufferedReader.readLine()) != null) {
-//                ObjectMapper mapper = new ObjectMapper();
-//                mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//                Snippet snippet = mapper.readValue(currentLine, Snippet.class);
-//                textFileIndexer.addSnippetDoc(w, snippet);
-//                i = i + 1;
-//            }
-//            System.out.println('i' + i);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try (
+                FileReader fileReader = new FileReader(("./snippetsJson/python/final/jsonl/train/python_train_0.jsonl"));
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+        ) {
+            String currentLine;
+            int i = 0;
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                Snippet snippet = mapper.readValue(currentLine, Snippet.class);
+                textFileIndexer.addSnippetDoc(w, snippet);
+                i = i + 1;
+            }
+            System.out.println('i' + i);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         int numDocs = w.getDocStats().numDocs;
         assertTrue(numDocs > 10000);

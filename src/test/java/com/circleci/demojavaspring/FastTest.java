@@ -1,7 +1,5 @@
 package com.circleci.demojavaspring;
 
-import static org.junit.Assert.*;
-
 import com.circleci.demojavaspring.model.Quote;
 import com.circleci.demojavaspring.model.Snippet;
 import com.circleci.demojavaspring.repository.TextFileIndexer;
@@ -29,6 +27,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class FastTest {
 
     @Test
@@ -45,24 +46,36 @@ public class FastTest {
 
     @Test
     public void addExampleFile() throws IOException {
-        StandardAnalyzer analyzer = new StandardAnalyzer();
-        Path path = Paths.get("./documents");
-        Directory index = new MMapDirectory(path);
-
-        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-
-        IndexWriter w = new IndexWriter(index, config);
+//        StandardAnalyzer analyzer = new StandardAnalyzer();
+//        Path path = Paths.get("./documents");
+//        Directory index = new MMapDirectory(path);
+//
+//        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+//
+//        IndexWriter w = new IndexWriter(index, config);
         TextFileIndexer textFileIndexer = new TextFileIndexer();
+        IndexWriter w = textFileIndexer.InitIndexWriter("./documents");
         textFileIndexer.addExampleDoc(w, "Lucene in Action", "193398817");
         textFileIndexer.addExampleDoc(w, "Lucene for Dummies", "55320055Z");
         textFileIndexer.addExampleDoc(w, "Managing Gigabytes", "55063554A");
         textFileIndexer.addExampleDoc(w, "The Art of Computer Science", "9900333X");
         int numDocs = w.getDocStats().numDocs;
         // delete the test added document
-        w.deleteAll();
-        w.close();
+        textFileIndexer.IndexWriterDeleteAll(w);
+        textFileIndexer.CloseIndexWriter(w);
         assertEquals(4, numDocs);
     }
+
+//    public IndexWriter InitIndexWriter(Path path) throws IOException {
+//        StandardAnalyzer analyzer = new StandardAnalyzer();
+//        Directory index = new MMapDirectory(path);
+//        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+//        IndexWriter w = new IndexWriter(index, config);
+//        return w;
+//    }
+//    public void CloseIndexWriter(IndexWriter w) throws IOException {
+//        w.close();
+//    }
 
     @Test
     public void searchExampleFile() throws IOException {
@@ -70,10 +83,9 @@ public class FastTest {
         StandardAnalyzer analyzer = new StandardAnalyzer();
         Path path = Paths.get("./documents");
         Directory index = new MMapDirectory(path);
-
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
-
         IndexWriter w = new IndexWriter(index, config);
+
         TextFileIndexer textFileIndexer = new TextFileIndexer();
         textFileIndexer.addExampleDoc(w, "Lucene in Action", "193398817");
         textFileIndexer.addExampleDoc(w, "Lucene for Dummies", "55320055Z");

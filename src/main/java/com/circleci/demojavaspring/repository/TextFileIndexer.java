@@ -33,6 +33,24 @@ public class TextFileIndexer {
         w.addDocument(doc);
     }
 
+    public IndexWriter InitIndexWriter(String stringPath) throws IOException {
+        Path path = Paths.get(stringPath);
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        Directory index = new MMapDirectory(path);
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        IndexWriter w = new IndexWriter(index, config);
+        return w;
+    }
+
+    public void CloseIndexWriter(IndexWriter w) throws IOException {
+        w.close();
+    }
+
+    public void IndexWriterDeleteAll(IndexWriter w) throws IOException {
+        w.deleteAll();
+    }
+
+
 //    private void indexExampleTextFile () throws IOException {
 //        StandardAnalyzer analyzer = new StandardAnalyzer();
 //        Path path = Paths.get("./");

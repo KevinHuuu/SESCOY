@@ -23,18 +23,19 @@ public class TextFileIndexer {
         w.addDocument(doc);
     }
 
-    private void indexExampleTextFile () throws IOException {
-        StandardAnalyzer analyzer = new StandardAnalyzer();
-        Path path = Paths.get("./");
-        Directory index = new MMapDirectory(path);
+//    private void indexExampleTextFile () throws IOException {
+//        StandardAnalyzer analyzer = new StandardAnalyzer();
+//        Path path = Paths.get("./");
+//        Directory index = new MMapDirectory(path);
+//
+//        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+//
+//        IndexWriter w = new IndexWriter(index, config);
+//        addDoc(w, "Lucene in Action", "193398817");
+//        addDoc(w, "Lucene for Dummies", "55320055Z");
+//        addDoc(w, "Managing Gigabytes", "55063554A");
+//        addDoc(w, "The Art of Computer Science", "9900333X");
+//        w.close();
+//    }
 
-        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-
-        IndexWriter w = new IndexWriter(index, config);
-        addDoc(w, "Lucene in Action", "193398817");
-        addDoc(w, "Lucene for Dummies", "55320055Z");
-        addDoc(w, "Managing Gigabytes", "55063554A");
-        addDoc(w, "The Art of Computer Science", "9900333X");
-        w.close();
-    }
 }

@@ -70,12 +70,14 @@ public class FastTest {
 
         IndexWriter w = new IndexWriter(index, config);
         TextFileIndexer textFileIndexer = new TextFileIndexer();
-//        textFileIndexer.addDoc(w, "Lucene in Action", "193398817");
-//        textFileIndexer.addDoc(w, "Lucene for Dummies", "55320055Z");
-//        textFileIndexer.addDoc(w, "Managing Gigabytes", "55063554A");
-//        textFileIndexer.addDoc(w, "The Art of Computer Science", "9900333X");
-//        textFileIndexer.addDoc(w, "The Art of Lacquer", "2900333X");
+        textFileIndexer.addDoc(w, "Lucene in Action", "193398817");
+        textFileIndexer.addDoc(w, "Lucene for Dummies", "55320055Z");
+        textFileIndexer.addDoc(w, "Managing Gigabytes", "55063554A");
+        textFileIndexer.addDoc(w, "The Art of Computer Science", "9900333X");
+        textFileIndexer.addDoc(w, "The Art of Lacquer", "2900333X");
         int numDocs = w.getDocStats().numDocs;
+        //delete all docs and close IndexWriter
+
         w.close();
 
         // search document by query
@@ -99,9 +101,15 @@ public class FastTest {
         }
         System.out.println("Found " + hits.length);
         assertEquals(2, hits.length);
-        //delete all docs
-        w.deleteAll();
-        w.close();
+
+
+        // Delete all generated docs after the test is finished
+        Path pathForDeleteAll = Paths.get("./documents");
+        Directory indexForDeleteAll = new MMapDirectory(pathForDeleteAll);
+        IndexWriterConfig configForDeleteAll = new IndexWriterConfig(analyzer);
+        IndexWriter wForDeleteAll = new IndexWriter(indexForDeleteAll, configForDeleteAll);
+        wForDeleteAll.deleteAll();
+        wForDeleteAll.close();
     }
 }
 

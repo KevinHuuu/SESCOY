@@ -1,6 +1,8 @@
 package com.circleci.demojavaspring.repository;
 
 import com.circleci.demojavaspring.model.Snippet;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -21,6 +23,9 @@ import org.apache.lucene.util.QueryBuilder;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class TextFileIndexer {
     public static void addExampleDoc(IndexWriter w, String title, String isbn) throws IOException {
@@ -70,8 +75,27 @@ public class TextFileIndexer {
         return query;
     }
 
-
-
+    public void ReadJsonlToIndexWriter (String stringPath, IndexWriter w) {
+        try (
+                FileReader fileReader = new FileReader(("./snippetsJson/python/final/jsonl/train/python_train_0.jsonl"));
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+        ) {
+            String currentLine;
+            int i = 0;
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                Snippet snippet = mapper.readValue(currentLine, Snippet.class);
+                this.addSnippetDoc(w, snippet);
+                i = i + 1;
+            }
+            System.out.println('i' + i);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 //    private void indexExampleTextFile () throws IOException {

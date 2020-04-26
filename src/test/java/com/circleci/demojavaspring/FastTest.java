@@ -46,13 +46,6 @@ public class FastTest {
 
     @Test
     public void addExampleFile() throws IOException {
-//        StandardAnalyzer analyzer = new StandardAnalyzer();
-//        Path path = Paths.get("./documents");
-//        Directory index = new MMapDirectory(path);
-//
-//        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-//
-//        IndexWriter w = new IndexWriter(index, config);
         TextFileIndexer textFileIndexer = new TextFileIndexer();
         IndexWriter w = textFileIndexer.InitIndexWriter("./documents");
         textFileIndexer.addExampleDoc(w, "Lucene in Action", "193398817");
@@ -66,47 +59,27 @@ public class FastTest {
         assertEquals(4, numDocs);
     }
 
-//    public IndexWriter InitIndexWriter(Path path) throws IOException {
-//        StandardAnalyzer analyzer = new StandardAnalyzer();
-//        Directory index = new MMapDirectory(path);
-//        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-//        IndexWriter w = new IndexWriter(index, config);
-//        return w;
-//    }
-//    public void CloseIndexWriter(IndexWriter w) throws IOException {
-//        w.close();
-//    }
 
     @Test
     public void searchExampleFile() throws IOException {
+        String filePath = "./documents";
         // construct document
-        StandardAnalyzer analyzer = new StandardAnalyzer();
-        Path path = Paths.get("./documents");
-        Directory index = new MMapDirectory(path);
-        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-        IndexWriter w = new IndexWriter(index, config);
-
         TextFileIndexer textFileIndexer = new TextFileIndexer();
+        IndexWriter w = textFileIndexer.InitIndexWriter(filePath);
         textFileIndexer.addExampleDoc(w, "Lucene in Action", "193398817");
         textFileIndexer.addExampleDoc(w, "Lucene for Dummies", "55320055Z");
         textFileIndexer.addExampleDoc(w, "Managing Gigabytes", "55063554A");
         textFileIndexer.addExampleDoc(w, "The Art of Computer Science", "9900333X");
         textFileIndexer.addExampleDoc(w, "The Art of Lacquer", "2900333X");
         int numDocs = w.getDocStats().numDocs;
-        //delete all docs and close IndexWriter
-        w.close();
+        textFileIndexer.CloseIndexWriter(w);
 
         // search document by query
         final var queryStr = "Art";
         final int maxHits = 100;
-//        Path path = Paths.get("./documents");
-//        Directory index = new MMapDirectory(path);
-
-        IndexReader indexReader = DirectoryReader.open(index);
-        IndexSearcher searcher = new IndexSearcher(indexReader);
-//        Analyzer analyzer = new StandardAnalyzer();
-        QueryBuilder builder = new QueryBuilder(analyzer);
-        Query query = builder.createBooleanQuery("title", queryStr);
+        final String field = "title";
+        IndexSearcher searcher = textFileIndexer.InitIndexReader(filePath);
+        Query query = textFileIndexer.InitQuery(field, queryStr);
         TopDocs topDocs = searcher.search(query, maxHits);
         ScoreDoc[] hits = topDocs.scoreDocs;
 
@@ -120,12 +93,9 @@ public class FastTest {
 
 
         // Delete all generated docs after the test is finished
-        Path pathForDeleteAll = Paths.get("./documents");
-        Directory indexForDeleteAll = new MMapDirectory(pathForDeleteAll);
-        IndexWriterConfig configForDeleteAll = new IndexWriterConfig(analyzer);
-        IndexWriter wForDeleteAll = new IndexWriter(indexForDeleteAll, configForDeleteAll);
-        wForDeleteAll.deleteAll();
-        wForDeleteAll.close();
+        IndexWriter wForDeleteAll = textFileIndexer.InitIndexWriter(filePath);
+        textFileIndexer.IndexWriterDeleteAll(wForDeleteAll);
+        textFileIndexer.CloseIndexWriter(wForDeleteAll);
     }
 
 

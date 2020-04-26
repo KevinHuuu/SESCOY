@@ -71,7 +71,7 @@ public class TextFileIndexer {
     public Query InitQuery (String field, String queryStr) {
         Analyzer analyzer = new StandardAnalyzer();
         QueryBuilder builder = new QueryBuilder(analyzer);
-        Query query = builder.createBooleanQuery("title", queryStr);
+        Query query = builder.createBooleanQuery(field, queryStr);
         return query;
     }
 

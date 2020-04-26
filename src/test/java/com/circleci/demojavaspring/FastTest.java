@@ -115,70 +115,36 @@ public class FastTest {
 
     @Test
     public void searchSnippetsFile() throws IOException {
-        StandardAnalyzer analyzer = new StandardAnalyzer();
-        Path path = Paths.get("./snippets");
-        Directory index = new MMapDirectory(path);
-
-        IndexWriterConfig config = new IndexWriterConfig(analyzer);
-
-        IndexWriter w = new IndexWriter(index, config);
+        String filePath = "./snippets";
         TextFileIndexer textFileIndexer = new TextFileIndexer();
-        try (
-                FileReader fileReader = new FileReader(("./snippetsJson/python/final/jsonl/train/python_train_0.jsonl"));
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
-        ) {
-            String currentLine;
-            int i = 0;
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                Snippet snippet = mapper.readValue(currentLine, Snippet.class);
-                textFileIndexer.addSnippetDoc(w, snippet);
-                i = i + 1;
-            }
-            System.out.println('i' + i);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        IndexWriter w = textFileIndexer.InitIndexWriter(filePath);
+        textFileIndexer.ReadJsonlToIndexWriter(filePath, w);
 
         int numDocs = w.getDocStats().numDocs;
         assertTrue(numDocs > 10000);
-        // delete the test added document
-//        w.deleteAll();
-        w.close();
+        textFileIndexer.CloseIndexWriter(w);
 
         // search document by query
         final var queryStr = "int to string";
         final int maxHits = 10;
-//        Path path = Paths.get("./documents");
-//        Directory index = new MMapDirectory(path);
-
-        IndexReader indexReader = DirectoryReader.open(index);
-        IndexSearcher searcher = new IndexSearcher(indexReader);
-//        Analyzer analyzer = new StandardAnalyzer();
-        QueryBuilder builder = new QueryBuilder(analyzer);
-        Query query = builder.createBooleanQuery("docstring", queryStr);
+        final String field = "docstring";
+        IndexSearcher searcher = textFileIndexer.InitIndexReader(filePath);
+        Query query = textFileIndexer.InitQuery(field, queryStr);
         TopDocs topDocs = searcher.search(query, maxHits);
         ScoreDoc[] hits = topDocs.scoreDocs;
 
         for (int i = 0; i < hits.length; i++) {
             int docId = hits[i].doc;
             Document d = searcher.doc(docId);
-            System.out.println(d.get("docstring") + " Score :" + hits[i].score);
+            System.out.println(d.get(field) + " Score :" + hits[i].score);
         }
         System.out.println("Found " + hits.length);
         assertTrue(hits.length >= 10);
 
-
         // Delete all generated docs after the test is finished
-        Path pathForDeleteAll = Paths.get("./snippets");
-        Directory indexForDeleteAll = new MMapDirectory(pathForDeleteAll);
-        IndexWriterConfig configForDeleteAll = new IndexWriterConfig(analyzer);
-        IndexWriter wForDeleteAll = new IndexWriter(indexForDeleteAll, configForDeleteAll);
-        wForDeleteAll.deleteAll();
-        wForDeleteAll.close();
+        IndexWriter wForDeleteAll = textFileIndexer.InitIndexWriter(filePath);
+        textFileIndexer.IndexWriterDeleteAll(wForDeleteAll);
+        textFileIndexer.CloseIndexWriter(wForDeleteAll);
     }
 
 

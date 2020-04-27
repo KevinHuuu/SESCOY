@@ -31,10 +31,10 @@ public class IndexedDocument {
         this.code = code.substring(0, min(254, code.length() - 1));
     }
     public void setPath(String path) {
-        this.path = path.substring(0, min(100, path.length() - 1));
+        this.path = path.substring(0, min(254, path.length() - 1));
     }
     public void setUrl(String url) {
-        this.url = url.substring(0, min(100, code.length() - 1));
+        this.url = url.substring(0, min(254, url.length() - 1));
     }
 
     public Integer getId() {

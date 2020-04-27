@@ -27,51 +27,19 @@
 
     <div class='navbar-top'>
       <nav class="head-nav">
-        <a href="#"><span class='textlink'>Gmail</span></a>
+        <a href="huchangran@gmail.com"><span class='textlink'>Gmail</span></a>
         <a href="#"><span class='textlink'>Images</span></a>
         <a href="#" title='Sescoy Apps'><img src="https://i.ibb.co/Q9kbVfX/apps.png" alt=""></a>
         <a href="#" title='Sescoy Account: You!'><span class='account-icon'>J</span></a>
       </nav>
     </div>
 
-<!--    <div class='main'>-->
-<!--      <div class='logo'>-->
-<!--        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">-->
-<!--      </div>-->
-<!--      <div class='search-bar'>-->
-<!--        <input type="search">-->
-<!--        <a href="#"><img src="https://i.ibb.co/cvZCCfk/l5S4LZ2.png" alt="" class='mic'></a>-->
-<!--      </div>-->
-<!--      <div class='btn-src'>-->
-<!--        <button>Secoy Search</button>-->
-<!--        <button>I'm feeling Lucky</button>-->
-<!--      </div>-->
-<!--      <div class='languages'>-->
-<!--        Sescoy offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div class='footer'>-->
-<!--      <footer>-->
-<!--        <nav class='footer-left'>-->
-<!--          <a href="#">Advertising</a>-->
-<!--          <a href="#">Business</a>-->
-<!--          <a href="#">About</a>-->
-<!--        </nav>-->
-<!--        <nav class='footer-right'>-->
-<!--          <a href="#">Privacy</a>-->
-<!--          <a href="#">Terms</a>-->
-<!--          <a href="#">Settings</a>-->
-<!--        </nav>-->
-<!--      </footer>-->
-<!--    </div>-->
-
     <div class='main'>
-      <div class='logo'>
-<!--        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">-->
-        <img src="https://i.ibb.co/w7yV2PB/SESCOY-Logo.png" alt="">
-<!--          <h1><a href="#">SESCOY</a></h1>-->
-      </div>
+<!--      <div class='logo'>-->
+<!--&lt;!&ndash;        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">&ndash;&gt;-->
+<!--        <img src="https://i.ibb.co/w7yV2PB/SESCOY-Logo.png" alt="">-->
+<!--&lt;!&ndash;          <h1><a href="#">SESCOY</a></h1>&ndash;&gt;-->
+<!--      </div>-->
       <form th:action="@{/query/add}" method="post">
         <div class='search-bar'>
           <input type="text" class="form-control" placeholder="Text input" name="query">
@@ -90,11 +58,8 @@
     </div>
 
     <div class="displayResults">
-    <div class="jumbotron">
-        <!--        <h2>Search Result</h2>-->
-<!--        <p th:if="${searchResults.empty}">-->
-<!--            Search Engine for Semantic Code Oh Yeah-->
-<!--        </p>-->
+    <div class="jbt">
+
         <div th:each="searchResult : ${searchResults}">
             <!--            <li th:text="${searchResult.docstring}"/>-->
             <pre>
@@ -112,35 +77,20 @@
     </div>
     </div>
 
-
-
-
-<!--    <div class="container">-->
-<!--        <div class="header clearfix">-->
-<!--          <h3 class="text-muted">Search Results</h3>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--        <div class="jumbotron">-->
-<!--          <h1>CircleCI Demo Java Application</h1>-->
-<!--          <p class="lead">This SESCOY.</p>-->
-<!--&lt;!&ndash;          <p><a class="btn btn-lg btn-success" href="/add" role="button">Add Quote</a></p>&ndash;&gt;-->
-<!--          <form th:action="@{/query/add}" method="post">-->
-<!--            <div><label>Search: <input type="text" name="query"/> </label></div>-->
-<!--            <div><input type="submit" value="Add Query"/></div>-->
-<!--          </form>-->
-<!--        </div>-->
-
-
-
-        <br/>
-
-
-<!--        <footer class="footer">-->
-<!--          <p>&copy; 2019 CircleCI</p>-->
-<!--        </footer>-->
-
-
+    <div class='footer'>
+        <footer>
+            <nav class='footer-left'>
+                <a href="#">Advertising</a>
+                <a href="#">Business</a>
+                <a href="#">About</a>
+            </nav>
+            <nav class='footer-right'>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Settings</a>
+            </nav>
+        </footer>
+    </div>
 
     <!-- Include Bootstrap and JQuery -->
     <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>

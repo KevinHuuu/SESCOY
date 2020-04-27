@@ -28,14 +28,23 @@ public class SpringWebTest {
 
     @Test
     public void IndexDocumentTest() throws InterruptedException, IOException {
+        String filePath = "./snippets";
+        TextFileIndexer textFileIndexer = new TextFileIndexer();
+        IndexWriter w = textFileIndexer.InitIndexWriter(filePath);
+        textFileIndexer.ReadJsonlToIndexWriter(filePath, w);
+
+        int numDocs = w.getDocStats().numDocs;
+        assertTrue(numDocs > 10000);
+        textFileIndexer.CloseIndexWriter(w);
+
         IndexSearcher searcher;
         final int maxHits = 10;
         TopDocs topDocs;
         final String field = "docstring";
         final var queryStr = "int";
-        String filePath = "./snippets";
+//        String filePath = "./snippets";
 
-        TextFileIndexer textFileIndexer = new TextFileIndexer();
+//        TextFileIndexer textFileIndexer = new TextFileIndexer();
         searcher = textFileIndexer.InitIndexReader(filePath);
         Query query = textFileIndexer.InitQuery(field, queryStr);
         topDocs = searcher.search(query, maxHits);

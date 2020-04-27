@@ -15,43 +15,91 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"></link>
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/jumbotron.css"></link>
+    <link rel="stylesheet" href="../static/css/jumbotron.css" th:href="@{/css/jumbotron.css}"></link>
   </head>
 
   <body>
 
+    <div class='navbar-top'>
+      <nav class="head-nav">
+        <a href="#"><span class='textlink'>Gmail</span></a>
+        <a href="#"><span class='textlink'>Images</span></a>
+        <a href="#" title='Sescoy Apps'><img src="https://i.ibb.co/Q9kbVfX/apps.png" alt=""></a>
+        <a href="#" title='Sescoy Account: You!'><span class='account-icon'>J</span></a>
+      </nav>
+    </div>
+
+    <div class='main'>
+      <div class='logo'>
+        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">
+      </div>
+      <div class='search-bar'>
+        <input type="search">
+        <a href="#"><img src="https://i.ibb.co/cvZCCfk/l5S4LZ2.png" alt="" class='mic'></a>
+      </div>
+      <div class='btn-src'>
+        <button>Secoy Search</button>
+        <button>I'm feeling Lucky</button>
+      </div>
+      <div class='languages'>
+        Sescoy offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a>
+      </div>
+    </div>
+
+<!--    <div class='footer'>-->
+<!--      <footer>-->
+<!--        <nav class='footer-left'>-->
+<!--          <a href="#">Advertising</a>-->
+<!--          <a href="#">Business</a>-->
+<!--          <a href="#">About</a>-->
+<!--        </nav>-->
+<!--        <nav class='footer-right'>-->
+<!--          <a href="#">Privacy</a>-->
+<!--          <a href="#">Terms</a>-->
+<!--          <a href="#">Settings</a>-->
+<!--        </nav>-->
+<!--      </footer>-->
+<!--    </div>-->
+
+
     <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-        <h3 class="text-muted">CircleCI Demo</h3>
-      </div>
+        <div class="header clearfix">
+          <nav>
+            <ul class="nav nav-pills pull-right">
+              <li role="presentation" class="active"><a href="#">Home</a></li>
+              <li role="presentation"><a href="#">About</a></li>
+              <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <h3 class="text-muted">CircleCI Demo</h3>
+        </div>
 
-      <div class="jumbotron">
-        <h1>CircleCI Demo Java Application</h1>
-        <p class="lead">This is a sample quotes list application to demonstrate building Java applications on CircleCI.</p>
-        <p><a class="btn btn-lg btn-success" href="/add" role="button">Add Quote</a></p>
-      </div>
+        <div class="jumbotron">
+          <h1>CircleCI Demo Java Application</h1>
+          <p class="lead">This is a sample quotes list application to demonstrate building Java applications on CircleCI.</p>
+<!--          <p><a class="btn btn-lg btn-success" href="/add" role="button">Add Quote</a></p>-->
+          <form th:action="@{/quote/add}" method="post">
+            <div><label>Quote: <input type="text" name="quote"/> </label></div>
+            <div><input type="submit" value="Add Quote"/></div>
+          </form>
+        </div>
 
-      <div>
-          <h2>Quotes</h2>
-          <p th:if="${quotes.empty}">
-            No quotes available. Why don't you <a href="/add">add</a> one?</td>
-          </p>
-          <ul th:each="quote : ${quotes}">
-              <li th:text="${quote.quote}"/>
-          </ul>
-      </div>
+        <div>
+            <h2>Quotes</h2>
+            <p th:if="${quotes.empty}">
+              No quotes available. Why don't you <a href="/add">add</a> one?</td>
+            </p>
+            <ul th:each="quote : ${quotes}">
+                <li th:text="${quote.docstring}"/>
+            </ul>
+        </div>
 
-      <br/>
-      <footer class="footer">
-        <p>&copy; 2019 CircleCI</p>
-      </footer>
+        <br/>
+
+
+        <footer class="footer">
+          <p>&copy; 2019 CircleCI</p>
+        </footer>
 
     </div> <!-- /container -->
 

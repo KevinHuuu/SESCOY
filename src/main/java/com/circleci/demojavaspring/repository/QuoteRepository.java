@@ -2,13 +2,15 @@ package com.circleci.demojavaspring.repository;
 
 import java.util.List;
 
+import com.circleci.demojavaspring.model.IndexedDocument;
 import org.springframework.data.repository.CrudRepository;
 
 import com.circleci.demojavaspring.model.Quote;
 
-public interface QuoteRepository extends CrudRepository<Quote, Long> {
+
+public interface QuoteRepository extends CrudRepository<IndexedDocument, Long> {
 
     @Override
-    List<Quote> findAll();
+    List<IndexedDocument> findAll();
 
 }

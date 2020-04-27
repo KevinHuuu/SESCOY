@@ -1,79 +1,122 @@
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
 }
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
+/* NAVBAR */
+.navbar-top {
+  height: 60px;
 }
-
-/* Custom page header */
-.header {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5;
+.navbar-top .head-nav {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1em;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
+.navbar-top .head-nav a {
+  padding: 0.6em;
+  text-decoration: none;
+  color: #4c4c4c;
 }
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+.navbar-top .head-nav a .textlink:hover {
+  text-decoration: underline;
 }
-
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+.navbar-top .head-nav a img {
+  padding-top: 5px;
 }
-.container-narrow > hr {
-  margin: 30px 0;
+.navbar-top .head-nav .account-icon {
+  display: block;
+  background: #73bbe3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: white;
 }
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+/* LOGO */
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
-.jumbotron .btn {
-  padding: 14px 24px;
-  font-size: 21px;
+.main .logo {
+  padding: 2em;
 }
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+.main .search-bar {
+  position: relative;
 }
-.marketing p + h4 {
-  margin-top: 28px;
+.main .search-bar input {
+  width: 700px;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  padding: 1em;
+  box-shadow: 0px 5px 13px -8px rgba(0, 0, 0, 0.3);
 }
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+.main .search-bar .mic {
+  height: 30px;
+  position: absolute;
+  right: 2%;
+  top: 15%;
+}
+.main .btn-src button {
+  background: #f0f0f0;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #6f6f6f;
+  padding: 0.9em 1.2em;
+  border-radius: 3px;
+  margin-top: 2em;
+}
+.main .btn-src button:nth-child(2) {
+  margin-left: 1em;
+}
+.main .btn-src button:hover {
+  color: black;
+  cursor: pointer;
+  border: 1px solid #D6D6D6;
+}
+.main .languages {
+  margin-top: 2em;
+  color: #4c4c4c;
+}
+.main .languages a {
+  text-decoration: none;
+}
+.main .languages a:hover {
+  text-decoration: underline;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  background: #f0f0f0;
+  height: 60px;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  border-top: 1px solid #E6E6E6;
+}
+footer .footer-left, footer .footer-right {
+  padding: 1em;
+}
+footer .footer-left a, footer .footer-right a {
+  text-decoration: none;
+  color: #8D8D8D;
+  padding: 1em;
+}
+footer .footer-left a:hover, footer .footer-right a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  .search-bar input {
+    max-width: 400px;
   }
 }

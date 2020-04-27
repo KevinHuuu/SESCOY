@@ -1,7 +1,12 @@
 package com.circleci.demojavaspring.model;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
+
 
 public class Snippet {
     private String path;
@@ -113,3 +118,5 @@ public class Snippet {
         this.func_name = func_name;
     }
 }
+
+

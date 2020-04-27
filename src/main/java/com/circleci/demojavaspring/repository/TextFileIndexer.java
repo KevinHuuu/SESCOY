@@ -1,5 +1,6 @@
 package com.circleci.demojavaspring.repository;
 
+
 import com.circleci.demojavaspring.model.Snippet;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +18,6 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.MMapDirectory;
-import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.QueryBuilder;
 
 import java.io.IOException;
@@ -86,6 +86,7 @@ public class TextFileIndexer {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 Snippet snippet = mapper.readValue(currentLine, Snippet.class);
+
                 this.addSnippetDoc(w, snippet);
                 i = i + 1;
             }

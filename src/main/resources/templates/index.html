@@ -16,6 +16,11 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../static/css/jumbotron.css" th:href="@{/css/jumbotron.css}"></link>
+
+      <link rel="stylesheet"
+            th:href="@{//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.1/build/styles/default.min.css}">
+<!--      <script src="/path/to/highlight.min.js"></script>-->
+<!--      <script>hljs.initHighlightingOnLoad();</script>-->
   </head>
 
   <body>
@@ -71,28 +76,43 @@
           <input type="text" class="form-control" placeholder="Text input" name="query">
           <a href="#"><img src="https://i.ibb.co/cvZCCfk/l5S4LZ2.png" alt="" class='mic'></a>
         </div>
-        <div class='btn-src'>
+          <br/>
+        <div style="text-align: center">
 <!--          <button type="submit" class="btn btn-primary">Search</button>-->
           <!--                  <button>Secoy Search</button>-->
-          <button type="submit">Search</button>
+          <button class="btn btn-primary" type="submit">Search</button>
         </div>
       </form>
       <div class='languages'>
-        Sescoy offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a>
+        SESCOY offered in: <a href="#">Python</a> | <a href="#">Java</a> | <a href="#">Go</a>
       </div>
 
+
     </div>
 
-    <div>
-<!--        <h2>Search Result</h2>-->
-        <p th:if="${searchResults.empty}">
-            No matched result available. Why don't you <a href="/add">add</a> one?</td>
-        </p>
-        <ul th:each="searchResult : ${searchResults}">
-<!--            <li th:text="${searchResult.docstring}"/>-->
-            <pre th:text="${searchResult.docstring}"/>
-        </ul>
+    <div class="displayResults">
+    <div class="jumbotron">
+        <!--        <h2>Search Result</h2>-->
+<!--        <p th:if="${searchResults.empty}">-->
+<!--            Search Engine for Semantic Code Oh Yeah-->
+<!--        </p>-->
+        <div th:each="searchResult : ${searchResults}">
+            <!--            <li th:text="${searchResult.docstring}"/>-->
+            <pre>
+                <button class="btn btn-default" th:text="${searchResult.url}">
+                </button>
+                th:text="${searchResult.path}"
+                th:text="${searchResult.docstring}"
+                <code th:text="${searchResult.code}" />
+            </pre>
+        </div>
+        <br/>
     </div>
+    </div>
+
+
+
+
 <!--    <div class="container">-->
 <!--        <div class="header clearfix">-->
 <!--          <h3 class="text-muted">Search Results</h3>-->
@@ -123,5 +143,8 @@
     <!-- Include Bootstrap and JQuery -->
     <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <!-- Include Highlight code block -->
+    <script th:src="@{//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.1/build/highlight.min.js}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

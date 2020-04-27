@@ -16,10 +16,10 @@ public class IndexedDocument {
     private Integer Id;
 
     private String docstring;
+    private String code;
+    private String path;
+    private String url;
 
-    public String getDocstring() {
-        return docstring;
-    }
 
     //debugging with string too long data exception
     public void setDocstring(String docstring) {
@@ -27,7 +27,33 @@ public class IndexedDocument {
     }
 
 
+    public void setCode(String code) {
+        this.code = code.substring(0, min(100, code.length() - 1));
+    }
+    public void setPath(String path) {
+        this.path = path.substring(0, min(100, path.length() - 1));
+    }
+    public void setUrl(String url) {
+        this.url = url.substring(0, min(100, code.length() - 1));
+    }
+
     public Integer getId() {
         return Id;
+    }
+
+    public String getDocstring() {
+        return docstring;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

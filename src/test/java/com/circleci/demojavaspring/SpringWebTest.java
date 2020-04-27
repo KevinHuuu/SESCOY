@@ -49,4 +49,39 @@ public class SpringWebTest {
         assertTrue(true);
     }
 
+    @Test
+    public void IndexDocumentTestWithFullFeature() throws InterruptedException, IOException {
+        String filePath = "./snippets";
+        TextFileIndexer textFileIndexer = new TextFileIndexer();
+        IndexWriter w = textFileIndexer.InitIndexWriter(filePath);
+        textFileIndexer.ReadJsonlToIndexWriter(filePath, w);
+
+        int numDocs = w.getDocStats().numDocs;
+        assertTrue(numDocs > 10000);
+        textFileIndexer.CloseIndexWriter(w);
+
+        IndexSearcher searcher;
+        final int maxHits = 10;
+        TopDocs topDocs;
+        final String field = "docstring";
+        final var queryStr = "int";
+//        String filePath = "./snippets";
+
+//        TextFileIndexer textFileIndexer = new TextFileIndexer();
+        searcher = textFileIndexer.InitIndexReader(filePath);
+        Query query = textFileIndexer.InitQuery(field, queryStr);
+        topDocs = searcher.search(query, maxHits);
+        for (int i = 0; i < topDocs.scoreDocs.length; i++) {
+            int docId = topDocs.scoreDocs[i].doc;
+            Document d = searcher.doc(docId);
+            IndexedDocument indexedDocument = new IndexedDocument();
+            indexedDocument.setDocstring(d.get("docstring"));
+            indexedDocument.setCode(d.get("code"));
+            indexedDocument.setUrl(d.get("url"));
+            indexedDocument.setPath(d.get("path"));
+            System.out.println("Original Docstring: " + d.get("docstring"));
+            System.out.println("Our Docstring: " + indexedDocument.getDocstring());
+
+        }
+    }
 }

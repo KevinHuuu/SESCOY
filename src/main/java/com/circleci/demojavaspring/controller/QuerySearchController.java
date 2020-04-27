@@ -58,6 +58,10 @@ public class QuerySearchController {
             Document d = searcher.doc(docId);
             IndexedDocument indexedDocument = new IndexedDocument();
             indexedDocument.setDocstring(d.get("docstring"));
+            indexedDocument.setCode(d.get("code"));
+            indexedDocument.setUrl(d.get("url"));
+            indexedDocument.setPath(d.get("path"));
+
             searchResultsRepository.save(indexedDocument);
             System.out.println("Our Docstring: " + indexedDocument.getDocstring());
         }

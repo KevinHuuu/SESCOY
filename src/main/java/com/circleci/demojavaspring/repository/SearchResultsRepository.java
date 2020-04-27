@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.circleci.demojavaspring.model.Quote;
 
 
-public interface QuoteRepository extends CrudRepository<IndexedDocument, Long> {
+public interface SearchResultsRepository extends CrudRepository<IndexedDocument, Long> {
 
     @Override
     List<IndexedDocument> findAll();

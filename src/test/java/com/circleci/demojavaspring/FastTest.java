@@ -147,7 +147,17 @@ public class FastTest {
         textFileIndexer.CloseIndexWriter(wForDeleteAll);
     }
 
+    @Test
+    public void generateSnippetsFile() throws IOException {
+        String filePath = "./snippets";
+        TextFileIndexer textFileIndexer = new TextFileIndexer();
+        IndexWriter w = textFileIndexer.InitIndexWriter(filePath);
+        textFileIndexer.ReadJsonlToIndexWriter(filePath, w);
 
+        int numDocs = w.getDocStats().numDocs;
+        assertTrue(numDocs > 10000);
+        textFileIndexer.CloseIndexWriter(w);
+    }
 
 }
 

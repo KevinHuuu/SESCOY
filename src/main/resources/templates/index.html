@@ -9,7 +9,7 @@
     <meta name="author" content=""></meta>
     <link rel="icon" href="../../favicon.ico"></link>
 
-    <title>SocialQuote</title>
+    <title>SESCOY</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"></link>
@@ -29,22 +29,22 @@
       </nav>
     </div>
 
-    <div class='main'>
-      <div class='logo'>
-        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">
-      </div>
-      <div class='search-bar'>
-        <input type="search">
-        <a href="#"><img src="https://i.ibb.co/cvZCCfk/l5S4LZ2.png" alt="" class='mic'></a>
-      </div>
-      <div class='btn-src'>
-        <button>Secoy Search</button>
-        <button>I'm feeling Lucky</button>
-      </div>
-      <div class='languages'>
-        Sescoy offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a>
-      </div>
-    </div>
+<!--    <div class='main'>-->
+<!--      <div class='logo'>-->
+<!--        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">-->
+<!--      </div>-->
+<!--      <div class='search-bar'>-->
+<!--        <input type="search">-->
+<!--        <a href="#"><img src="https://i.ibb.co/cvZCCfk/l5S4LZ2.png" alt="" class='mic'></a>-->
+<!--      </div>-->
+<!--      <div class='btn-src'>-->
+<!--        <button>Secoy Search</button>-->
+<!--        <button>I'm feeling Lucky</button>-->
+<!--      </div>-->
+<!--      <div class='languages'>-->
+<!--        Sescoy offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a>-->
+<!--      </div>-->
+<!--    </div>-->
 
 <!--    <div class='footer'>-->
 <!--      <footer>-->
@@ -61,47 +61,63 @@
 <!--      </footer>-->
 <!--    </div>-->
 
-
-    <div class="container">
-        <div class="header clearfix">
-          <nav>
-            <ul class="nav nav-pills pull-right">
-              <li role="presentation" class="active"><a href="#">Home</a></li>
-              <li role="presentation"><a href="#">About</a></li>
-              <li role="presentation"><a href="#">Contact</a></li>
-            </ul>
-          </nav>
-          <h3 class="text-muted">CircleCI Demo</h3>
+    <div class='main'>
+      <div class='logo'>
+<!--        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">-->
+          <h1><a href="#">SESCOY</a></h1>
+      </div>
+      <form th:action="@{/query/add}" method="post">
+        <div class='search-bar'>
+          <input type="text" class="form-control" placeholder="Text input" name="query">
+          <a href="#"><img src="https://i.ibb.co/cvZCCfk/l5S4LZ2.png" alt="" class='mic'></a>
         </div>
-
-        <div class="jumbotron">
-          <h1>CircleCI Demo Java Application</h1>
-          <p class="lead">This is a sample quotes list application to demonstrate building Java applications on CircleCI.</p>
-<!--          <p><a class="btn btn-lg btn-success" href="/add" role="button">Add Quote</a></p>-->
-          <form th:action="@{/quote/add}" method="post">
-            <div><label>Quote: <input type="text" name="quote"/> </label></div>
-            <div><input type="submit" value="Add Quote"/></div>
-          </form>
+        <div class='btn-src'>
+<!--          <button type="submit" class="btn btn-primary">Search</button>-->
+          <!--                  <button>Secoy Search</button>-->
+          <button type="submit">Search</button>
         </div>
+      </form>
+      <div class='languages'>
+        Sescoy offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a>
+      </div>
 
-        <div>
-            <h2>Quotes</h2>
-            <p th:if="${quotes.empty}">
-              No quotes available. Why don't you <a href="/add">add</a> one?</td>
-            </p>
-            <ul th:each="quote : ${quotes}">
-                <li th:text="${quote.docstring}"/>
-            </ul>
-        </div>
+    </div>
+
+    <div>
+<!--        <h2>Search Result</h2>-->
+        <p th:if="${searchResults.empty}">
+            No matched result available. Why don't you <a href="/add">add</a> one?</td>
+        </p>
+        <ul th:each="searchResult : ${searchResults}">
+<!--            <li th:text="${searchResult.docstring}"/>-->
+            <pre th:text="${searchResult.docstring}"/>
+        </ul>
+    </div>
+<!--    <div class="container">-->
+<!--        <div class="header clearfix">-->
+<!--          <h3 class="text-muted">Search Results</h3>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--        <div class="jumbotron">-->
+<!--          <h1>CircleCI Demo Java Application</h1>-->
+<!--          <p class="lead">This SESCOY.</p>-->
+<!--&lt;!&ndash;          <p><a class="btn btn-lg btn-success" href="/add" role="button">Add Quote</a></p>&ndash;&gt;-->
+<!--          <form th:action="@{/query/add}" method="post">-->
+<!--            <div><label>Search: <input type="text" name="query"/> </label></div>-->
+<!--            <div><input type="submit" value="Add Query"/></div>-->
+<!--          </form>-->
+<!--        </div>-->
+
+
 
         <br/>
 
 
-        <footer class="footer">
-          <p>&copy; 2019 CircleCI</p>
-        </footer>
+<!--        <footer class="footer">-->
+<!--          <p>&copy; 2019 CircleCI</p>-->
+<!--        </footer>-->
 
-    </div> <!-- /container -->
 
 
     <!-- Include Bootstrap and JQuery -->

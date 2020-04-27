@@ -59,6 +59,7 @@ public class QuerySearchController {
             IndexedDocument indexedDocument = new IndexedDocument();
             indexedDocument.setDocstring(d.get("docstring"));
             searchResultsRepository.save(indexedDocument);
+            System.out.println("Our Docstring: " + indexedDocument.getDocstring());
         }
         return new ModelAndView("redirect:/");
     }

@@ -14,17 +14,6 @@ import java.io.IOException;
 import static org.junit.Assert.assertTrue;
 
 public class SpringWebTest {
-    @Test
-    public void generateSnippetsFile() throws IOException {
-        String filePath = "./snippets";
-        TextFileIndexer textFileIndexer = new TextFileIndexer();
-        IndexWriter w = textFileIndexer.InitIndexWriter(filePath);
-        textFileIndexer.ReadJsonlToIndexWriter(filePath, w);
-
-        int numDocs = w.getDocStats().numDocs;
-        assertTrue(numDocs > 10000);
-        textFileIndexer.CloseIndexWriter(w);
-    }
 
     @Test
     public void IndexDocumentTest() throws InterruptedException, IOException {

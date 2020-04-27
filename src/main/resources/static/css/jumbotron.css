@@ -65,7 +65,8 @@
   right: 2%;
   top: 15%;
 }
-.main .btn-src button {
+
+.btn-src button {
   background: #f0f0f0;
   border: 1px solid transparent;
   font-size: 0.85rem;
@@ -74,11 +75,14 @@
   padding: 0.9em 1.2em;
   border-radius: 3px;
   margin-top: 2em;
+  justify-content: center;
 }
-.main .btn-src button:nth-child(2) {
+.btn-src button:nth-child(2) {
+  justify-content: center;
   margin-left: 1em;
 }
-.main .btn-src button:hover {
+.btn-src button:hover {
+  justify-content: center;
   color: black;
   cursor: pointer;
   border: 1px solid #D6D6D6;
@@ -119,4 +123,7 @@ footer .footer-left a:hover, footer .footer-right a:hover {
   .search-bar input {
     max-width: 400px;
   }
+}
+.pre {
+width: 700px;
 }

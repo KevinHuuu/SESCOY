@@ -28,7 +28,7 @@ public class IndexedDocument {
 
 
     public void setCode(String code) {
-        this.code = code.substring(0, min(100, code.length() - 1));
+        this.code = code.substring(0, min(254, code.length() - 1));
     }
     public void setPath(String path) {
         this.path = path.substring(0, min(100, path.length() - 1));

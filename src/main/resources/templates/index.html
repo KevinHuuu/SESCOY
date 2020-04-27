@@ -69,7 +69,8 @@
     <div class='main'>
       <div class='logo'>
 <!--        <img src="https://i.ibb.co/WfFbzLy/Moogle.png" alt="">-->
-          <h1><a href="#">SESCOY</a></h1>
+        <img src="https://i.ibb.co/w7yV2PB/SESCOY-Logo.png" alt="">
+<!--          <h1><a href="#">SESCOY</a></h1>-->
       </div>
       <form th:action="@{/query/add}" method="post">
         <div class='search-bar'>
@@ -86,8 +87,6 @@
       <div class='languages'>
         SESCOY offered in: <a href="#">Python</a> | <a href="#">Java</a> | <a href="#">Go</a>
       </div>
-
-
     </div>
 
     <div class="displayResults">
@@ -99,10 +98,13 @@
         <div th:each="searchResult : ${searchResults}">
             <!--            <li th:text="${searchResult.docstring}"/>-->
             <pre>
-                <button class="btn btn-default" th:text="${searchResult.url}">
-                </button>
-                th:text="${searchResult.path}"
-                th:text="${searchResult.docstring}"
+                <div class="sourceCode">
+                  <button class="btn btn-default">
+                    <a th:href="@{${searchResult.url}}">Source Code</a>
+                  </button>
+                </div>
+<!--                <a th:href="@{${searchResult.path}}">Repo Location</a>-->
+<!--                th:text="${searchResult.docstring}"-->
                 <code th:text="${searchResult.code}" />
             </pre>
         </div>

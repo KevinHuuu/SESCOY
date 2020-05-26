@@ -17,6 +17,7 @@ This project is build upon the [CircleCI tutorial](https://github.com/CircleCI-P
 
 ### Starting the application
 ```
+./gradlew build
 ./gradlew bootRunDev
 ```
 Navigate to http://localhost:8080

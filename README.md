@@ -21,7 +21,7 @@ This project is build upon the [CircleCI tutorial](https://github.com/CircleCI-P
 ```
 Navigate to http://localhost:8080
 
-![Screenshot of index page](assets/SESCOY_Logo.png)
+![Screenshot of index page](assets/SYSCOY_demo.png)
 
 
 ## License
